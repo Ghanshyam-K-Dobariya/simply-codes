@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>js prectice</title>
+
+    <style>
+        .body {
+            max-width: 250px;
+        }
+
+        .button-div {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .btn {
+            margin: 10px 0;
+            padding: 10px, 20px;
+            border-radius: 5px;
+            color: white;
+        }
+
+        .btn-start {
+            background-color: blue;
+            border: 2px solid blue;
+        }
+
+        .btn-pause {
+            background-color: rgb(255, 0, 0);
+            border: 2px solid rgb(255, 0, 0);
+        }
+
+        .btn-resume {
+            background-color: rgb(86, 90, 78);
+            border: 2px solid rgb(95, 98, 87);
+        }
+
+        .btn-reset {
+            background-color: rgb(49, 221, 127);
+            border: 2px solid rgb(49, 221, 127);
+        }
+    </style>
+</head>
+
+<body class="body">
+
+    <div class="">
+        <label for="timeStart">Time</label>
+        <input id="timeStart" name="timeStart" type="text">
+    </div>
+
+    <div class="button-div">
+        <button class="btn btn-start" id='start-btn' onclick="start()">Start</button>
+        <button class="btn btn-pause" id='Pause-btn' onclick="pause()">Pause</button>
+        <button class="btn btn-resume" id='Resume-btn' onclick="resume()">Resume</button>
+        <button class="btn btn-reset" id='start-btn' onclick="reset()">Reset</button>
+    </div>
+
+    <script>
+        var inputField, time;
+        let settimer;
+        document.getElementById('Resume-btn').style.display = 'none'
+        document.getElementById('Pause-btn').style.display = 'none'
+
+        function start() {
+            inputField = document.getElementById('timeStart')
+            time = inputField.value;
+            secondUpdate()
+
+        }
+
+        function secondUpdate() {
+            if (time > 0) {
+                inputField.disabled = true;
+                settimer = setInterval(() => {
+                    console.log(time--)
+                    inputField.value = time
+                    if (time == 0) {
+                        clearInterval(settimer)
+                        inputField.value = '';
+                        inputField.disabled = false;
+                        console.log(" he;llldknajc")
+                        document.getElementById('start-btn').style.display = 'none'
+                        document.getElementById('start-btn').style.display = 'block'
+                        document.getElementById('Pause-btn').style.display = 'none'
+                    }
+
+                }, 1000)
+                document.getElementById('start-btn').style.display = 'none'
+                document.getElementById('Pause-btn').style.display = 'block'
+            }
+        }
+
+        function pause() {
+            clearInterval(settimer)
+            document.getElementById('Pause-btn').style.display = 'none'
+            document.getElementById('Resume-btn').style.display = 'block'
+        }
+
+        function resume() {
+            secondUpdate()
+            document.getElementById('Resume-btn').style.display = 'none'
+        }
+
+        function reset() {
+            clearInterval(settimer)
+            inputField.value = ""
+            inputField.disabled = false;
+            document.getElementById('start-btn').style.display = 'block'
+            document.getElementById('Resume-btn').style.display = 'none'
+            document.getElementById('Pause-btn').style.display = 'none'
+        }
+    </script>
+
+</body>
+
+</html>
